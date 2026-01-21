@@ -1,12 +1,10 @@
 # These are neither going to be embedded or passed but rather outside variables because they should never change
 import matplotlib.pyplot as plt
 
-room = 0 # Ts
+room = 0.03 # Ts
 r = 1 # cooling constant
 delta = 0.1 # delta t, the "step"
 TEMP = 100 # Starting value of temp 
-
-if room == 0: room+=delta
 
 # function
 def step(TEMP):
@@ -14,7 +12,7 @@ def step(TEMP):
 
 # Let's try and visualize it:
 points = [TEMP]
-while TEMP > room:
+while TEMP > room+0.01:
    TEMP = step(TEMP)
    points.append(TEMP)
     
