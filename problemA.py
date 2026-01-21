@@ -6,13 +6,15 @@ r = 1 # cooling constant
 delta = 0.1 # delta t, the "step"
 TEMP = 100 # Starting value of temp 
 
+if room == 0: room+=delta
+
 # function
 def step(TEMP):
     return TEMP - r * (TEMP - room) * delta # Returns temprature at time t + delta
 
 # Let's try and visualize it:
 points = [TEMP]
-while TEMP > room+delta:
+while TEMP > room:
    TEMP = step(TEMP)
    points.append(TEMP)
     
