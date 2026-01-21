@@ -21,4 +21,4 @@ plt.ylabel('Temprature')
 plt.xlabel('Time')
 plt.show()
 
-# print(dTdt)
+# print(dTdt
