@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
 def step(T, dt):
-    return T - r * (T - Ts) * dt # Returns temprature at time t + delta
+    return T - r * (T - Ts) * dt # Returns temperature at time t + delta, i.e. T(t + dt)
 
 # Set parameters for part (a)
 r = 1

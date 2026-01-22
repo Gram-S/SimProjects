@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
 def step(T, dt):
-    return T - r * (T - Ts) * dt # Returns temprature at time t + delta, i.e. T(t + dt)
+    return T - r * (T - Ts) * dt # Returns temperature at time t + delta, i.e. T(t + dt)
 
 # Set parameters for part (b)
 r = 0.03 # r must have units of 1/min, since time is in minutes. So r=0.03 corresponds to 30 per hour
