@@ -13,7 +13,7 @@ T = 82
 while T > 75:
     T = step(T, dt)
     temps1.append(T)
-times1 = [x * dt for x in range(len(temps1))]
+times1 = [0] + [x * dt for x in range(len(temps1)-1)]
 
 # Cool to 80 first, then add cream (80 - 5 to 75)
 temps2 = [87]
@@ -34,6 +34,7 @@ print(f"\nCream at 80°C is faster by {times1[-1] - times2[-1]:.2f} minutes")
 # Plot cream first
 plt.figure()
 plt.plot(times1, temps1, 'b-', linewidth=2)
+print(temps1)
 plt.ylabel('Temperature (°C)')
 plt.xlabel('Time (minutes)')
 plt.title('Cream first')
