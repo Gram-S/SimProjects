@@ -10,7 +10,6 @@ dt = 0.1
 T0 = 100
 
 # Run simulation, storing results in lists
-times = [0]
 temps = [T0]
 T = T0
 t = 0
@@ -19,7 +18,8 @@ while T > Ts + 0.01:
     T = step(T, dt)
     t = t + dt
     temps.append(T)
-    times.append(t)
+    
+times = [x * dt for x in range(len(temps))]
 
 # Plot temps and times
 plt.plot(times, temps, 'b-', linewidth=2)

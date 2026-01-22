@@ -8,10 +8,9 @@ r = 0.03 # r must have units of 1/min, since time is in minutes. So r=0.03 corre
 Ts = 17
 T0 = 87
 
-### Make sure that your value of delta t is sufficiently small so that it does not affect your results
+### (from assignment) Make sure that your value of delta t is sufficiently small so that it does not affect your results
 # 0.1 appears to be sufficiently small
 dt = 0.1
-times = [0]
 temps = [T0]
 T = T0
 t = 0
@@ -20,7 +19,8 @@ while T > Ts + 0.01:
     T = step(T, dt)
     t = t + dt
     temps.append(T)
-    times.append(t)
+    
+times = [x * dt for x in range(len(temps))]
 
 # Plot times and temps
 plt.plot(times, temps, 'b-', linewidth=2)
