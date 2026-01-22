@@ -34,7 +34,6 @@ print(f"\nCream at 80°C is faster by {times1[-1] - times2[-1]:.2f} minutes")
 # Plot cream first
 plt.figure()
 plt.plot(times1, temps1, 'b-', linewidth=2)
-print(temps1)
 plt.ylabel('Temperature (°C)')
 plt.xlabel('Time (minutes)')
 plt.title('Cream first')
@@ -45,5 +44,6 @@ plt.plot(times2, temps2, 'b-', linewidth=2)
 plt.ylabel('Temperature (°C)')
 plt.xlabel('Time (minutes)')
 plt.title('Cream at 80°C')
-
 plt.show()
+
+print(temps1)
