@@ -1,24 +1,28 @@
-# These are neither going to be embedded or passed but rather outside variables because they should never change
 import matplotlib.pyplot as plt
 
-room = 0.03 # Ts
-r = 1 # cooling constant
-delta = 0.1 # delta t, the "step"
-TEMP = 100 # Starting value of temp 
+def step(T, dt):
+    return T - r * (T - Ts) * dt # Returns temprature at time t + delta
 
-# function
-def step(TEMP):
-    return TEMP - r * (TEMP - room) * delta # Returns temprature at time t + delta
+# Set parameters for part (a)
+r = 1
+Ts = 0
+dt = 0.1
+T0 = 100
 
-# Let's try and visualize it:
-points = [TEMP]
-while TEMP > room+0.01:
-   TEMP = step(TEMP)
-   points.append(TEMP)
-    
-plt.plot([x * delta for x in range(0, len(points))], points) # first parameter is the time array
-plt.ylabel('Temprature')
+# Run simulation, storing results in lists
+times = [0]
+temps = [T0]
+T = T0
+t = 0
+
+while T > Ts + 0.01:
+    T = step(T, dt)
+    t = t + dt
+    temps.append(T)
+    times.append(t)
+
+# Plot temps and times
+plt.plot(times, temps, 'b-', linewidth=2)
+plt.ylabel('Temperature (°C)')
 plt.xlabel('Time')
 plt.show()
-
-# print(dTdt
