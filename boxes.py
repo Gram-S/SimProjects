@@ -8,6 +8,13 @@ class Box:
     def __init__(self, bounds_x, bounds_y):
         self.bounds_x = bounds_x
         self.bounds_y = bounds_y
+        # Can probably account for ball radius by modifying the bounds
+
+    def bounds_x(self):
+        return self.bounds_x
+
+    def bounds_y(self):
+        return self.bounds_y
 
     def __str__(self):
         return f"\nbox lol\n X bounds: {self.bounds_x}\n Y bounds: {self.bounds_y}"
