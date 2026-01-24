@@ -17,13 +17,14 @@ class Ball:
 
 
 if __name__ == "__main__":
-    ball = Ball(1, 1, 1, 1)
+    ball_test = Ball(1, 1, 1, 1)
+    print(ball_test) # Expected 1,1,1,1
 
     # Test function adds 1 to everything
     def test_function(array):
-        for i in range(array.size):
-            array[i] += 1
+        array[0] += 1
+        array[1] += 1
         return array
 
     ball.euler_update_all(test_function, 0.1)
-    print(ball) # Expected 4.4,4.4,3.3,3.3
+    print(ball_test) # Expected 2.2, 2.2, 1.1, 1.1
