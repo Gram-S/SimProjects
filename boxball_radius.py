@@ -1,64 +1,8 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.animation import FuncAnimation
-from matplotlib.patches import Circle
-
-
-class Ball:
-    # Set up the ball with initial position and velocity
-    def __init__(self, position_x, position_y, velocity_at_x, velocity_at_y, radius):
-        self.position_x = position_x
-        self.position_y = position_y
-        self.velocity_at_x = velocity_at_x
-        self.velocity_at_y = velocity_at_y
-        self.radius = radius
-        self.x_memory = []
-        self.y_memory = []
-
-    def add_to_memory(self):
-        self.x_memory.append(self.position_x)
-        self.y_memory.append(self.position_y)
-
-    def get_x_memory(self):
-        return self.x_memory
-
-    def get_y_memory(self):
-        return self.y_memory
-
-    # Returns the state as an array [x,y,vx,vy]
-    def state(self):
-        return np.array(
-            [self.position_x, self.position_y, self.velocity_at_x, self.velocity_at_y]
-        )
-
-    def plot(self):
-        plt.plot(self.x_memory, self.y_memory, "k")
-        plt.show()
-
-    def animate(self, plot_bounds=[-1, -1, 1, 1, -1], xlim=1.2, ylim=1.2, color="r"):
-        fig, ax = plt.subplots()
-        ax.plot(plot_bounds, list(reversed(plot_bounds)), "r")
-        ax.set_xlim(-xlim, xlim)
-        ax.set_ylim(-ylim, ylim)
-        ax.set_aspect("equal")
-        
-        ball_circle = Circle((self.x_memory[0], self.y_memory[0]), self.radius, color="blue")
-        ax.add_patch(ball_circle)
-        
-        def animate(i):
-            ball_circle.center = (self.x_memory[i], self.y_memory[i])
-            return (ball_circle,)
-        
-        anim = FuncAnimation(fig, animate, frames = len(self.x_memory), interval = 1, blit = True)
-        plt.show()
-
-    # X is an array [x,y,vx,vy], this is done to make it easier to use euler
-    def update_state(self, X):
-        self.position_x = X[0]
-        self.position_y = X[1]
-        self.velocity_at_x = X[2]
-        self.velocity_at_y = X[3]
-
+import matplotlib.patches as patches
+from ball import Ball
 
 def euler(x, f, dt):
     """
@@ -135,5 +79,13 @@ if __name__ == "__main__":
         ## The following is brought to you by Claude ##
         ### ANIMATION (uses same X, Y data from above) ###
         # Blitting redraws only the ball each frame instead of the whole figure
-
+    # Set up the inital box
+    fig, ax = plt.subplots()
+    box = patches.Rectangle((-1, -1), 2, 2, edgecolor='red', facecolor='none')
+    ax.add_patch(box)
+    ax.set_xlim(-1.2, 1.2)
+    ax.set_ylim(-1.2, 1.2)
+    ax.set_aspect("equal")
+        
+    anim = ball.animate(fig, ax)
     plt.show()
