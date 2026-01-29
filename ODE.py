@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import math
-%matplotlib inline
 
 def Euler(dt, f, t, y, args):
     return y + f(t,y,*args) * dt 
@@ -39,7 +38,7 @@ def solve_ode(f,tspan, y0, method = Euler, *args, **options):
             t0 is the initial time
             tf is the final time
     
-    y0 - The initial state of the system, must be passed as a numpy array.
+    y0 - The initial state of the system, must be passed as a numpy array. I think it is [starting postion (y0), init velocity]
     
     method - The method of integrating the ODEs. This week will be one of Euler, 
              Euler-Cromer, or Euler-Richardson
@@ -64,26 +63,29 @@ def solve_ode(f,tspan, y0, method = Euler, *args, **options):
     and N_y is the number of equations
     
     """
-    y=[y0]
-    t=[tspan[0]]
-
+    y=[y0] # Initial Position
+    init_velocity = y0[1] # Are we supposed to use this? 
+    t=[tspan[0]] # Initial time
+    
     if method not in (Euler,EulerCromer,EulerRichardson):
         raise Error("wrong")
 
     while t[-1] < tspan[1]:
-        y.append()
+        y.append(f(t[-1], y[-1],*args)) #This is probably correct-ish? 
+        t.append(t[-1] + init_velocity) # Velocity is definitely not supposed to be here? I think a dt is supposed to be here
+
+    return t, y # We know this has to be the return
     
 if __name__ == "__main__":
 
+    
     # y = [y,v]
     def simple_gravity(t,y,g):
         dydt = y[1] # Velocity v
         dvdt = -g
         return dydt, dvdt
 
-    y = [3, 0]
-    t = [0, math.sqrt(6/g)]
-   #  print(solve_ode(simply_gravity, [t0,tf], [y0,v0], Euler)) # Should return -9.8
+    print(solve_ode(simple_gravity, [0,100], [0,1], Euler, 9.8)) # Should return -9.8
     
 
     # TODO: Write the code that initializes the lists to hold y and t,
