@@ -63,17 +63,22 @@ def solve_ode(f,tspan, y0, method = Euler, *args, **options):
     and N_y is the number of equations
     
     """
-    y=[y0] # Initial Position
-    init_velocity = y0[1] # Are we supposed to use this? 
-    t=[tspan[0]] # Initial time
-    
+    steps = 0
+    y=[ [steps, y0[0]] ] # Initial Position 
+    t=[ tspan[0] ] # Initial time
+    dt = 0.1 # Assume some timestep to be small
+
     if method not in (Euler,EulerCromer,EulerRichardson):
         raise Error("wrong")
 
     while t[-1] < tspan[1]:
-        y.append(f(t[-1], y[-1],*args)) #This is probably correct-ish? 
-        t.append(t[-1] + init_velocity) # Velocity is definitely not supposed to be here? I think a dt is supposed to be here
+        steps += 1
+        number_of_equations = len(f(t[-1], y0, *args)) # This is a very literal interpretation of the problem
+        y.append([steps, number_of_equations])
+        t.append(t[-1]+dt)
 
+    y = np.array(y)
+    t = np.array(t)
     return t, y # We know this has to be the return
     
 if __name__ == "__main__":
@@ -85,7 +90,7 @@ if __name__ == "__main__":
         dvdt = -g
         return dydt, dvdt
 
-    print(solve_ode(simple_gravity, [0,100], [0,1], Euler, 9.8)) # Should return -9.8
+    print(solve_ode(simple_gravity, [0,10], [0,0], Euler, 9.8)) # Should return -9.8
     
 
     # TODO: Write the code that initializes the lists to hold y and t,
