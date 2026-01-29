@@ -11,7 +11,6 @@ def solve_ode(f, tspan, y0, method = Euler, *args, **options):
     t = [ tspan[0] ] # Vector with initial time
 
     dt = 0.01 # Let some dt value be pretty low
-    print(args[0])
 
     while t[-1] < tspan[1]:
         solved_value = method(dt, f, t[-1], y[-1], args)
